@@ -1,0 +1,6 @@
+# qualquer coisa adicionada a este arquivo será ignorada
+pelo ESLint.
+package.json
+package-lock.json
+dist
+lint.*
