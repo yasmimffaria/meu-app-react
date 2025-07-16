@@ -1,9 +1,10 @@
+/* Container principal */
 .simularPedidoContainer {
-  padding: 30px;
+  padding: 20px;
   font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
   color: #333;
-  max-width: 600px;
-  margin: auto;
+  min-height: 100vh;
 }
 
 .simularPedidoContainer.dark {
@@ -11,50 +12,146 @@
   color: #f5f5f5;
 }
 
+/* Título */
+.titulo {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #e65100;
+}
+
+/* Grid de produtos */
+.produtosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+/* Card do produto */
 .produtoCard {
-  background: #fff3e0;
+  background: #fff;
+  border-radius: 12px;
   padding: 20px;
   text-align: center;
-  border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ddd;
+  transition: transform 0.2s ease;
+}
+
+.produtoCard:hover {
+  transform: translateY(-2px);
 }
 
 .dark .produtoCard {
-  background: #333;
+  background: #2a2a2a;
+  border: 1px solid #444;
 }
 
-.produtoCard img {
-  width: 150px;
+/* Imagem do produto */
+.produtoImagem {
+  width: 100%;
   height: 150px;
   object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 15px;
 }
 
+/* Texto do produto */
+.produtoNome {
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.produtoCodigo {
+  margin: 5px 0;
+  color: #666;
+  font-size: 14px;
+}
+
+.dark .produtoCodigo {
+  color: #ccc;
+}
+
+.produtoPreco {
+  margin: 5px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #f57c00;
+}
+
+/* Botão simular */
 .btnSimular {
-  margin-top: 15px;
   background-color: #f57c00;
   color: white;
-  padding: 10px 20px;
   border: none;
+  padding: 10px 20px;
   border-radius: 8px;
-  font-weight: bold;
   cursor: pointer;
-  transition: 0.3s;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
 .btnSimular:hover {
   background-color: #e65100;
 }
 
-.formSimulador {
-  margin-top: 30px;
-  background: #fff8f1;
-  padding: 25px;
-  border-radius: 10px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+/* Mensagem quando não há produtos */
+.semProdutos {
+  text-align: center;
+  padding: 40px;
+  color: #666;
 }
 
-.dark .formSimulador {
+.dark .semProdutos {
+  color: #ccc;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.dark .modalContent {
   background: #2a2a2a;
+  color: #f5f5f5;
+}
+
+.modalTitulo {
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Formulário */
+.formSimulador {
+  display: flex;
+  flex-direction: column;
 }
 
 .formGroup {
@@ -63,8 +160,13 @@
 
 .formGroup label {
   display: block;
-  font-weight: bold;
   margin-bottom: 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+.dark .formGroup label {
+  color: #f5f5f5;
 }
 
 .formGroup input,
@@ -73,6 +175,8 @@
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 6px;
+  font-size: 14px;
+  box-sizing: border-box;
 }
 
 .dark .formGroup input,
@@ -82,26 +186,69 @@
   border: 1px solid #666;
 }
 
+.formGroup input:focus,
+.formGroup select:focus {
+  outline: none;
+  border-color: #f57c00;
+}
+
+/* Ações do formulário */
 .formActions {
   display: flex;
   gap: 10px;
   margin-top: 20px;
+  justify-content: flex-end;
 }
 
 .btnPrimary {
   background: #f57c00;
   color: #fff;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.btnPrimary:hover {
+  background: #e65100;
 }
 
 .btnSecondary {
   background: #ccc;
   color: #333;
   border: none;
-  padding: 10px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.btnSecondary:hover {
+  background: #bbb;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produtosGrid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .modalContent {
+    padding: 20px;
+    width: 95%;
+  }
+
+  .formActions {
+    flex-direction: column;
+  }
+
+  .btnPrimary,
+  .btnSecondary {
+    width: 100%;
+  }
 }

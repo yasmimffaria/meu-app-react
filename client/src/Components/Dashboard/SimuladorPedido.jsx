@@ -1,16 +1,22 @@
 import React, { useState } from "react";
 import "./SimularPedido.css";
-import produtoImg from "../../Assets/logo.png"; // sua imagem
+// Import the default logo image
+import defaultLogo from '../../Assets/logo.png';
 
 const SimularPedido = ({ darkMode }) => {
   const [mostrarFormulario, setMostrarFormulario] = useState(false);
+  const [produtoSelecionado, setProdutoSelecionado] = useState(null);
   const [formData, setFormData] = useState({
     codproduto: "",
-    funcionario: "",
     qtd: "",
-    opcap: "", // interno, retirada ou delivery
-    comissao: "",
+    opcap: "",
     status: "",
+  });
+
+  // Buscar produtos do localStorage
+  const [produtos] = useState(() => {
+    const produtosStorage = localStorage.getItem('produtos');
+    return produtosStorage ? JSON.parse(produtosStorage) : [];
   });
 
   const handleChange = (e) => {
@@ -18,7 +24,14 @@ const SimularPedido = ({ darkMode }) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSimular = () => {
+  const handleSimular = (produto) => {
+    setProdutoSelecionado(produto);
+    setFormData({
+      codproduto: produto.codigo || produto.nome || "",
+      qtd: "",
+      opcap: "",
+      status: "",
+    });
     setMostrarFormulario(true);
   };
 
@@ -28,120 +41,158 @@ const SimularPedido = ({ darkMode }) => {
     alert("Pedido simulado com sucesso!");
     setFormData({
       codproduto: "",
-      funcionario: "",
       qtd: "",
       opcap: "",
-      comissao: "",
       status: "",
     });
     setMostrarFormulario(false);
+    setProdutoSelecionado(null);
+  };
+
+  const getImagePath = (produto) => {
+    // If the product has a specific image, try to use it
+    if (produto.imagem) {
+      // Option 1: If images are in public folder
+      return `/assets/${produto.imagem}`;
+
+      // Option 2: If you want to use imported images, you'll need to import them individually
+      // or create a mapping object at the top of the file
+    }
+    // Otherwise, use the default logo
+    return defaultLogo;
   };
 
   return (
-    <div className={`simularPedidoContainer ${darkMode ? "dark" : "light"}`}>
-      <div className="produtoCard">
-        <img src={produtoImg} alt="Produto" />
-        <h3>Simulador de Pedido</h3>
-        <button className="btnSimular" onClick={handleSimular}>
-          Simular Pedido
-        </button>
-      </div>
+      <div className={`simularPedidoContainer ${darkMode ? "dark" : "light"}`}>
+        <h2 className="titulo">Simulador de Pedido</h2>
 
-      {mostrarFormulario && (
-        <form className="formSimulador" onSubmit={handleSubmit}>
-          <div className="formGroup">
-            <label>Código do Produto</label>
-            <input
-              type="text"
-              name="codproduto"
-              value={formData.codproduto}
-              onChange={handleChange}
-              required
-            />
-          </div>
+        {/* Lista de Produtos */}
+        <div className="produtosGrid">
+          {produtos.map((produto, index) => (
+              <div key={index} className="produtoCard">
+                <img
+                    src={getImagePath(produto)}
+                    alt={produto.nome}
+                    className="produtoImagem"
+                    onError={(e) => {
+                      // Fallback to default logo if image fails to load
+                      e.target.src = defaultLogo;
+                    }}
+                />
+                <h3 className="produtoNome">{produto.nome}</h3>
+                <p className="produtoCodigo">Produto: {produto.nome}</p>
+                <p className="produtoPreco">
+                  R$ {produto.preco ? Number(produto.preco).toFixed(2) : '0.00'}
+                </p>
+                <p className="produtoQuantidade">
+                  Estoque: {produto.qtd || 0}
+                </p>
+                {produto.descricao && (
+                    <p className="produtoDescricao">
+                      {produto.descricao.length > 50
+                          ? produto.descricao.substring(0, 50) + '...'
+                          : produto.descricao}
+                    </p>
+                )}
+                <button
+                    className="btnSimular"
+                    onClick={() => handleSimular(produto)}
+                >
+                  Simular Pedido
+                </button>
+              </div>
+          ))}
+        </div>
 
-          <div className="formGroup">
-            <label>Funcionário</label>
-            <input
-              type="text"
-              name="funcionario"
-              value={formData.funcionario}
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="formGroup">
-            <label>Quantidade</label>
-            <input
-              type="number"
-              name="qtd"
-              value={formData.qtd}
-              onChange={handleChange}
-              min="1"
-              required
-            />
-          </div>
-
-          <div className="formGroup">
-            <label>Tipo de Pedido</label>
-            <select
-              name="opcap"
-              value={formData.opcap}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Selecione</option>
-              <option value="interno">Interno</option>
-              <option value="retirada">Retirada</option>
-              <option value="delivery">Delivery</option>
-            </select>
-          </div>
-
-          {formData.opcap === "interno" && (
-            <div className="formGroup">
-              <label>Comissão (%)</label>
-              <input
-                type="number"
-                name="comissao"
-                value={formData.comissao}
-                onChange={handleChange}
-                placeholder="Ex: 5"
-                required
-              />
+        {produtos.length === 0 && (
+            <div className="semProdutos">
+              <p>Nenhum produto cadastrado encontrado.</p>
+              <p>Cadastre produtos para poder simular pedidos.</p>
             </div>
-          )}
+        )}
 
-          <div className="formGroup">
-            <label>Status</label>
-            <select
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-              required
-            >
-              <option value="">Selecione</option>
-              <option value="feito">Feito</option>
-              <option value="preparo">Preparo</option>
-              <option value="concluido">Concluído</option>
-            </select>
-          </div>
+        {/* Modal do Formulário */}
+        {mostrarFormulario && (
+            <div className="modalOverlay">
+              <div className="modalContent">
+                <h3 className="modalTitulo">
+                  Simular Pedido - {produtoSelecionado?.nome}
+                </h3>
 
-          <div className="formActions">
-            <button type="submit" className="btnPrimary">
-              Confirmar Simulação
-            </button>
-            <button
-              type="button"
-              className="btnSecondary"
-              onClick={() => setMostrarFormulario(false)}
-            >
-              Cancelar
-            </button>
-          </div>
-        </form>
-      )}
-    </div>
+                <form className="formSimulador" onSubmit={handleSubmit}>
+                  <div className="formGroup">
+                    <label>Código do Produto</label>
+                    <input
+                        type="text"
+                        name="codproduto"
+                        value={formData.codproduto}
+                        onChange={handleChange}
+                        required
+                    />
+                  </div>
+
+                  <div className="formGroup">
+                    <label>Quantidade</label>
+                    <input
+                        type="number"
+                        name="qtd"
+                        value={formData.qtd}
+                        onChange={handleChange}
+                        min="1"
+                        required
+                    />
+                  </div>
+
+                  <div className="formGroup">
+                    <label>Tipo de Pedido</label>
+                    <select
+                        name="opcap"
+                        value={formData.opcap}
+                        onChange={handleChange}
+                        required
+                    >
+                      <option value="">Selecione</option>
+                      <option value="interno">Interno</option>
+                      <option value="retirada">Retirada</option>
+                      <option value="delivery">Delivery</option>
+                    </select>
+                  </div>
+
+                  <div className="formGroup">
+                    <label>Status</label>
+                    <select
+                        name="status"
+                        value={formData.status}
+                        onChange={handleChange}
+                        required
+                    >
+                      <option value="">Selecione</option>
+                      <option value="feito">Feito</option>
+                      <option value="preparo">Preparo</option>
+                      <option value="concluido">Concluído</option>
+                    </select>
+                  </div>
+
+                  <div className="formActions">
+                    <button type="submit" className="btnPrimary">
+                      Confirmar Simulação
+                    </button>
+                    <button
+                        type="button"
+                        className="btnSecondary"
+                        onClick={() => {
+                          setMostrarFormulario(false);
+                          setProdutoSelecionado(null);
+                        }}
+                    >
+                      Cancelar
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+        )}
+      </div>
   );
 };
 
