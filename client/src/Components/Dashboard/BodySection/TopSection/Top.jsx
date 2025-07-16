@@ -9,24 +9,6 @@ import img from '../../../../Assets/gilbert.jpg';
 const Top = ({ darkMode, toggleTheme }) => {
   return (
     <div className={`topSection ${darkMode ? "dark" : "light"}`}>
-      <div className="headerSection flex">
-        <div className="title">
-          <h1>Bem vindo!</h1>
-          <p>Ao gerenciador de pedidos!</p>
-        </div>
-
-        <div className="searchBar flex">
-          <input type="text" placeholder='Search Dashboard' />
-          <BiSearchAlt className="icon" />
-        </div>
-
-        <div className="adminDiv flex">
-          <TbMessageCircle className="icon" />
-          <MdOutlineNotificationsNone className="icon" />
-          <MdDarkMode className="icon" onClick={toggleTheme} />
-        </div>
-      </div>
-
       <div className="contentSection grid">
         <div className="totalsCard">
           <div className="totalHeader">

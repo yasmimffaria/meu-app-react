@@ -3,6 +3,8 @@ import '../../App.css';
 import Sidebar from '../Dashboard/SideBarSection/Sidebar';
 import Body from '../Dashboard/BodySection/Body';
 import CadastrarProduto from './ProductForm';
+import HeaderSection from '../Dashboard/BodySection/TopSection/HeaderSection';
+
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -39,8 +41,9 @@ const Dashboard = () => {
               activeSection={activeSection}
               setActiveSection={setActiveSection}
           />
-          <div className="mainContent">
-            {renderContent()}
+         <div className="mainContent">
+          <HeaderSection darkMode={darkMode} toggleTheme={toggleTheme} />
+          {renderContent()}
           </div>
         </div>
       </div>
