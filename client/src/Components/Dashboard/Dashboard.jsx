@@ -1,32 +1,32 @@
-import React, { useState } from 'react';
-import '../../App.css';
-import Sidebar from '../Dashboard/SideBarSection/Sidebar';
-import Body from '../Dashboard/BodySection/Body';
-import CadastrarProduto from './ProductForm';
-import HeaderSection from '../Dashboard/BodySection/TopSection/HeaderSection';
-
+import React, { useState } from "react";
+import "../../App.css";
+import Sidebar from "../Dashboard/SideBarSection/Sidebar";
+import Body from "../Dashboard/BodySection/Body";
+import CadastrarProduto from "./ProductForm";
+import SimularPedido from "./SimuladorPedido";
+import HeaderSection from "../Dashboard/BodySection/TopSection/HeaderSection";
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
-  const [activeSection, setActiveSection] = useState('dashboard');
+  const [activeSection, setActiveSection] = useState("dashboard");
 
   const toggleTheme = () => {
-    setDarkMode(prev => !prev);
+    setDarkMode((prev) => !prev);
   };
 
   const renderContent = () => {
-    switch(activeSection) {
-      case 'dashboard':
+    switch (activeSection) {
+      case "dashboard":
         return <Body darkMode={darkMode} toggleTheme={toggleTheme} />;
-      case 'cadastrar-produto':
+      case "cadastrar-produto":
         return <CadastrarProduto darkMode={darkMode} />;
-      case 'simular-pedido':
+      case "simular-pedido":
         return <SimularPedido darkMode={darkMode} />;
-      case 'cadastrar-funcionario':
+      case "cadastrar-funcionario":
         return <CadastrarFuncionario darkMode={darkMode} />;
-      case 'alerta-estoque':
+      case "alerta-estoque":
         return <AlertaEstoque darkMode={darkMode} />;
-      case 'comissao':
+      case "comissao":
         return <Comissao darkMode={darkMode} />;
       default:
         return <Body darkMode={darkMode} toggleTheme={toggleTheme} />;
@@ -34,19 +34,19 @@ const Dashboard = () => {
   };
 
   return (
-      <div className={`dashboard ${darkMode ? "dark" : "light"}`}>
-        <div className="dashboardContainer flex">
-          <Sidebar
-              darkMode={darkMode}
-              activeSection={activeSection}
-              setActiveSection={setActiveSection}
-          />
-         <div className="mainContent">
+    <div className={`dashboard ${darkMode ? "dark" : "light"}`}>
+      <div className="dashboardContainer flex">
+        <Sidebar
+          darkMode={darkMode}
+          activeSection={activeSection}
+          setActiveSection={setActiveSection}
+        />
+        <div className="mainContent">
           <HeaderSection darkMode={darkMode} toggleTheme={toggleTheme} />
           {renderContent()}
-          </div>
         </div>
       </div>
+    </div>
   );
 };
 

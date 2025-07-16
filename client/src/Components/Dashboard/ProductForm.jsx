@@ -5,6 +5,7 @@ const CadastrarProduto = ({ darkMode }) => {
   const [formData, setFormData] = useState({
     nome: "",
     preco: "",
+    qtd: "",
     descricao: "",
   });
 
@@ -72,6 +73,17 @@ const CadastrarProduto = ({ darkMode }) => {
               required
             />
           </div>
+          <div className="formGroup">
+            <label>Quantidade</label>
+            <input
+              type="number"
+              name="qtd"
+              value={formData.qtd}
+              onChange={handleInputChange}
+              placeholder="Ex: 1"
+              required
+            />
+          </div>
 
           <div className="formGroup">
             <label>Descrição</label>
@@ -111,6 +123,7 @@ const CadastrarProduto = ({ darkMode }) => {
               <tr>
                 <th>Nome</th>
                 <th>Preço (R$)</th>
+                <th>Quantidade</th>
                 <th>Descrição</th>
               </tr>
             </thead>
@@ -119,6 +132,7 @@ const CadastrarProduto = ({ darkMode }) => {
                 <tr key={index}>
                   <td>{produto.nome}</td>
                   <td>{parseFloat(produto.preco).toFixed(2)}</td>
+                  <td>{parseInt(produto.qtd)}</td>
                   <td>{produto.descricao}</td>
                 </tr>
               ))}

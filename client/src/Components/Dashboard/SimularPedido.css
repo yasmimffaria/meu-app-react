@@ -1,0 +1,107 @@
+.simularPedidoContainer {
+  padding: 30px;
+  font-family: Arial, sans-serif;
+  color: #333;
+  max-width: 600px;
+  margin: auto;
+}
+
+.simularPedidoContainer.dark {
+  background-color: #1e1e1e;
+  color: #f5f5f5;
+}
+
+.produtoCard {
+  background: #fff3e0;
+  padding: 20px;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.dark .produtoCard {
+  background: #333;
+}
+
+.produtoCard img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+}
+
+.btnSimular {
+  margin-top: 15px;
+  background-color: #f57c00;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btnSimular:hover {
+  background-color: #e65100;
+}
+
+.formSimulador {
+  margin-top: 30px;
+  background: #fff8f1;
+  padding: 25px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark .formSimulador {
+  background: #2a2a2a;
+}
+
+.formGroup {
+  margin-bottom: 15px;
+}
+
+.formGroup label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.formGroup input,
+.formGroup select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.dark .formGroup input,
+.dark .formGroup select {
+  background: #444;
+  color: #fff;
+  border: 1px solid #666;
+}
+
+.formActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.btnPrimary {
+  background: #f57c00;
+  color: #fff;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btnSecondary {
+  background: #ccc;
+  color: #333;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
