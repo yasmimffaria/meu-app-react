@@ -1,31 +1,184 @@
-.tabelaProdutos {
-  margin-top: 2rem;
+:root {
+  --orange: #f57c00;
+  --orange-light: #ffe0b2;
+  --orange-dark: #e65100;
+  --background-light: #fff;
+  --background-dark: #1e1e1e;
+  --text-light: #000;
+  --text-dark: #fff;
+  --gray-border: #ddd;
 }
 
-.tabelaProdutos h3 {
-  margin-bottom: 1rem;
+/* Container principal */
+.cadastrarProdutoContainer {
+  padding: 40px;
+  min-height: 100vh;
+  font-family: "Segoe UI", sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-light);
+  transition: all 0.3s ease;
 }
 
-.tabelaProdutos table {
+/* Dark Mode */
+.cadastrarProdutoContainer.dark {
+  background-color: var(--background-dark);
+  color: var(--text-dark);
+}
+
+/* Card do formulário */
+.formCard {
+  background: var(--orange-light);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  transition: all 0.3s ease;
+}
+
+.dark .formCard {
+  background: #333;
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
+}
+
+/* Header */
+.contentHeader h2 {
+  margin-bottom: 6px;
+  color: var(--orange-dark);
+}
+
+.contentHeader p {
+  margin-bottom: 20px;
+  font-size: 14px;
+  color: #666;
+}
+
+.dark .contentHeader p {
+  color: #bbb;
+}
+
+/* Campos do formulário */
+.formGroup {
+  margin-bottom: 20px;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--gray-border);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  border-color: var(--orange-dark);
+  outline: none;
+}
+
+.dark .formGroup input,
+.dark .formGroup textarea {
+  background: #2a2a2a;
+  color: #fff;
+  border-color: #555;
+}
+
+/* Botões */
+.formActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btnPrimary {
+  background-color: var(--orange-dark);
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.btnPrimary:hover {
+  background-color: #bf360c;
+}
+
+.btnSecondary {
+  background-color: #f0f0f0;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.btnSecondary:hover {
+  background-color: #ddd;
+}
+
+.dark .btnSecondary {
+  background-color: #444;
+  color: #eee;
+}
+
+.dark .btnSecondary:hover {
+  background-color: #555;
+}
+
+/* Tabela de produtos */
+.tabelaCard {
+  margin: 50px auto 0;
+  padding: 20px;
+  background: var(--orange-light);
+  border-radius: 12px;
+  max-width: 800px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.dark .tabelaCard {
+  background: #292929;
+  color: #fff;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.05);
+}
+
+.produtosTable {
   width: 100%;
   border-collapse: collapse;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  margin-top: 15px;
 }
 
-.tabelaProdutos th, .tabelaProdutos td {
-  padding: 0.8rem;
-  border: 1px solid #ddd;
+.produtosTable th,
+.produtosTable td {
+  padding: 12px;
   text-align: left;
+  border-bottom: 1px solid #ccc;
 }
 
-.tabelaProdutos th {
-  background-color: #f97316;
-  color: #fff;
+.produtosTable th {
+  background-color: var(--orange);
+  color: white;
 }
 
-.tabelaProdutos tr:nth-child(even) {
-  background-color: #f9f9f9;
+.dark .produtosTable th {
+  background-color: var(--orange-dark);
+}
+
+.produtosTable tr:hover {
+  background-color: #fff3e0;
+}
+
+.dark .produtosTable tr:hover {
+  background-color: #383838;
 }
