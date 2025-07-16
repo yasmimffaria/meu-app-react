@@ -1,6 +1,6 @@
 :root {
-  --PrimaryColor: hsl(94, 59%, 35%);
-  --HoverColor: #bdf094;
+  --PrimaryColororange: hsl(24, 98%, 50%);
+  --HoverColororange: #f07909;
   --paleGreen: hsl(96, 75%, 89%);
   --whiteColor: hsl(0, 0%, 100%);
   --blackColor: hsl(0, 0%, 18%);
@@ -31,7 +31,7 @@
   cursor: pointer;
 }
 .sideBar .logoDiv img {
-  max-width: 20px;
+  max-width: 30%;
   margin-right: 0.5rem;
   background: var(--inputColor);
   border-radius: 2px;
@@ -39,7 +39,7 @@
 }
 .sideBar .logoDiv h2 {
   font-size: var(--h2FontSize);
-  color: var(--PrimaryColor);
+  color: var(--PrimaryColororange);
 }
 .sideBar .menuDiv .divTitle,
 .sideBar .settingsDiv .divTitle {
@@ -93,7 +93,7 @@
 }
 .sideBar .sideBarCard .icon {
   position: absolute;
-  background: var(--HoverColor);
+  background: var(--HoverColororange);
   border: 10px solid var(--whiteColor);
   font-size: 3rem;
   border-radius: 50%;
@@ -105,7 +105,7 @@
 .sideBar .sideBarCard .cardContent {
   position: relative;
   padding: 1rem;
-  background: var(--HoverColor);
+  background: var(--HoverColororange);
   border-radius: 10px;
   overflow: hidden;
 }

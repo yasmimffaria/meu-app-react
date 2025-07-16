@@ -2,6 +2,8 @@ import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
+import CadastrarProduto from './Components/Dashboard/ProductForm'; // ✅ importa o formulário
+
 import {
   createBrowserRouter,
   RouterProvider
@@ -10,20 +12,23 @@ import {
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <div><Login /></div>
+    element: <Dashboard />
   },
   {
     path: '/register',
-    element: <div><Register /></div>
+    element: <Register />
   },
   {
     path: '/dashboard',
-    element: <div><Dashboard /></div>
-  }
+    element: <Dashboard />
+  },
+  {
+    path: '/cadastrar-produto',
+    element: <CadastrarProduto /> // ✅ nova rota aqui
+  },
 ])
 
 function App() {
-
   return (
     <div>
       <RouterProvider router={router} />
@@ -31,4 +36,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

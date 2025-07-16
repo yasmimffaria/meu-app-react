@@ -1,20 +1,18 @@
-import React from 'react'
-import './top.css'
-import { BiSearchAlt } from 'react-icons/bi'
-import { TbMessageCircle } from 'react-icons/tb'
-import { MdOutlineNotificationsNone } from 'react-icons/md'
-import { BsArrowRightShort, BsQuestionCircle } from 'react-icons/bs'
-import img from '../../../../Assets/gilbert.jpg'
-import img2 from '../../../../Assets/images (2).png'
-import video from '../../../../Assets/video.mp4'
+import React from 'react';
+import './top.css';
+import { BiSearchAlt } from 'react-icons/bi';
+import { TbMessageCircle } from 'react-icons/tb';
+import { MdOutlineNotificationsNone, MdOutlineFoodBank, MdAllInbox, MdDarkMode } from 'react-icons/md';
+import { BsTruck, BsArrowDownShort } from 'react-icons/bs';
+import img from '../../../../Assets/gilbert.jpg';
 
-const Top = () => {
+const Top = ({ darkMode, toggleTheme }) => {
   return (
-    <div className="topSection">
+    <div className={`topSection ${darkMode ? "dark" : "light"}`}>
       <div className="headerSection flex">
         <div className="title">
-          <h1>Welcome to Planti.</h1>
-          <p>Hello Gilbert, Welcome back!</p>
+          <h1>Bem vindo!</h1>
+          <p>Ao gerenciador de pedidos!</p>
         </div>
 
         <div className="searchBar flex">
@@ -25,70 +23,84 @@ const Top = () => {
         <div className="adminDiv flex">
           <TbMessageCircle className="icon" />
           <MdOutlineNotificationsNone className="icon" />
-          <div className="adminImage">
-            <img src={img} alt="Admin Image" />
-          </div>
+          <MdDarkMode className="icon" onClick={toggleTheme} />
         </div>
-
       </div>
 
-      <div className="cardSection flex">
-        <div className="rightCard flex">
-          <h1>Create and sell extraordinary products</h1>
-          <p>The world's fast growing industry today are natural made products!</p>
-
-          <div className="buttons flex">
-            <button className="btn">Explore More</button>
-            <button className="btn transparent">Top Sellers</button>
+      <div className="contentSection grid">
+        <div className="totalsCard">
+          <div className="totalHeader">
+            <h3>Valor total: R$ 500000</h3>
           </div>
 
-          <div className="videoDiv">
-            <video src={video} autoPlay loop muted></video>
+          <div className="iconsSummary flex">
+            <div className="iconCard yellow">
+              <MdOutlineFoodBank size={30} />
+              <p>Interno<br />32</p>
+            </div>
+            <div className="iconCard red">
+              <MdAllInbox size={30} />
+              <p>Retirada<br />16</p>
+            </div>
+            <div className="iconCard blue">
+              <BsTruck size={30} />
+              <p>Delivery<br />8</p>
+            </div>
           </div>
-        </div>
 
-        <div className="leftCard flex">
-          <div className="main flex">
-
-            <div className="textDiv">
-              <h1>My Stat</h1>
-
-              <div className="flex">
-                <span>
-                  Today <br /> <small>4 Orders</small>
-                </span>
-                <span>
-                  This Month <br /> <small>175 Orders</small>
-                </span>
-              </div>
-
-              <span className="flex link">
-                Go to my orders <BsArrowRightShort className="icon" />
-              </span>
-            </div>
-
-            <div className="imgDiv">
-              <img src={img2} alt="Image Name" />
-            </div>
-            {/* We Shall use this card later */}
-            <div className="sideBarCard">
-              <BsQuestionCircle className="icon" />
-              <div className="cardContent">
-                <div className="circle1"></div>
-                <div className="circle2"></div>
-
-                <h3>Help Center</h3>
-                <p>Having trouble in Planti, please contact us from for more questions.</p>
-                <button className="btn">Go to help center</button>
-              </div>
-            </div>
-
+          <div className="totalsList">
+            <p className="totalItem red">Valor total: R$ 500000</p>
+            <p className="totalItem blue">Valor total: R$ 500000</p>
           </div>
         </div>
 
+        <div className="ordersCard">
+          <div className="ordersHeader flex">
+            <h3>Pedidos</h3>
+            <button className="btn">Gerar Relatório</button>
+          </div>
+
+          <table className="ordersTable">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>Horário</th>
+                <th>Valor</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              {/* exemplo de linhas */}
+              <tr>
+                <td>Fauget Cafe</td>
+                <td>Today<br />2m ago</td>
+                <td>R$ 500<br />QR Code</td>
+                <td className="status done">✓ Done</td>
+              </tr>
+              <tr>
+                <td>Fauget Cafe</td>
+                <td>Today<br />2m ago</td>
+                <td>R$ 500<br />QR Code</td>
+                <td className="status done">✓ Done</td>
+              </tr>
+              <tr>
+                <td>Fauget Cafe</td>
+                <td>Today<br />2m ago</td>
+                <td>R$ 500<br />QR Code</td>
+                <td className="status done">✓ Done</td>
+              </tr>
+              {/* outras linhas aqui... */}
+            </tbody>
+          </table>
+
+          <div className="moreOrders flex">
+            <span>Mais Pedidos</span>
+            <BsArrowDownShort />
+          </div>
+        </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Top
+export default Top;

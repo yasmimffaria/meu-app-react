@@ -423,4 +423,127 @@ wanna see how to create/build it along. */
 }
 ::-webkit-scrollbar {
   display: none;
-}/*# sourceMappingURL=App.css.map */
+}/*# sourceMappingURL=App.css.map *//* ---------- ICON CARDS (Interno, Retirada, Delivery) ---------- */
+.iconCard {
+  background-color: #f0f0f0;
+  border-radius: 10px;
+  padding: 1rem;
+  text-align: center;
+  flex: 1;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Cores para cada tipo no modo claro */
+.iconCard.yellow {
+  background-color: #fffbe6;
+}
+
+.iconCard.red {
+  background-color: #ffe6e6;
+}
+
+.iconCard.blue {
+  background-color: #e6f0ff;
+}
+
+/* Estilos para MODO ESCURO */
+.dark .iconCard {
+  background-color: #2b2b2b;
+}
+
+.dark .iconCard.yellow {
+  background-color: #4b4200;
+}
+
+.dark .iconCard.red {
+  background-color: #4a1f1f;
+}
+
+.dark .iconCard.blue {
+  background-color: #1c2a3a;
+}
+/* ----------- BASE: fundo e texto ------------ */
+.light {
+  background-color: #f5f5f5;
+  color: #1a1a1a;
+}
+
+.dark {
+  background-color: #121212;
+  color: #f5f5f5;
+}
+
+/* ----------- SIDEBAR ------------ */
+.sideBar.light {
+  background-color: #ffffff;
+}
+
+.sideBar.dark {
+  background-color: #1e1e1e;
+}
+
+/* ----------- TOP SECTION ------------ */
+.topSection.light {
+  background-color: #ffffff;
+}
+
+.topSection.dark {
+  background-color: #1a1a1a;
+}
+
+/* ----------- MAIN CONTENT ------------ */
+.mainContent.dark {
+  background-color: #181818;
+}
+
+.mainContent.light {
+  background-color: #f9f9f9;
+}
+
+/* ----------- CARDS ------------ */
+.totalsCard,
+.ordersCard {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 1rem;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.dark .totalsCard,
+.dark .ordersCard {
+  background-color: #242424;
+  color: #f5f5f5;
+}
+
+/* ----------- TABELA ------------ */
+.ordersTable {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+
+.ordersTable th,
+.ordersTable td {
+  padding: 0.75rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.dark .ordersTable th,
+.dark .ordersTable td {
+  border-color: #444;
+}
+
+/* ----------- ÍCONES e outros ------------ */
+.icon {
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.status.done {
+  color: green;
+}
+
+.status.pending {
+  color: orange;
+}

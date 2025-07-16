@@ -1,17 +1,23 @@
-import React from 'react'
-import '../../App.css'
-import Sidebar from '../Dashboard/SideBarSection/Sidebar'
-import Body from '../Dashboard/BodySection/Body'
+import React, { useState } from 'react';
+import '../../App.css';
+import Sidebar from '../Dashboard/SideBarSection/Sidebar';
+import Body from '../Dashboard/BodySection/Body';
 
 const Dashboard = () => {
-    return (
-        <div className="dashboard flex">
-            <div className="dashboardContainer flex">
-                <Sidebar/>
-                <Body/>
-            </div>
-        </div>
-    )
-}
+  const [darkMode, setDarkMode] = useState(false);
 
-export default Dashboard
+  const toggleTheme = () => {
+    setDarkMode(prev => !prev);
+  };
+
+  return (
+    <div className={`dashboard ${darkMode ? "dark" : "light"}`}>
+      <div className="dashboardContainer flex">
+        <Sidebar darkMode={darkMode} />
+        <Body darkMode={darkMode} toggleTheme={toggleTheme} />
+      </div>
+    </div>
+  );
+};
+
+export default Dashboard;
