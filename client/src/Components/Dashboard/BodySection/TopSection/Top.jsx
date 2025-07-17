@@ -126,7 +126,6 @@ const Top = ({ darkMode, toggleTheme }) => {
           <div className="ordersCard">
             <div className="ordersHeader flex">
               <h3>Pedidos</h3>
-              <button className="btn">Gerar Relatório</button>
             </div>
 
             <table className="ordersTable" style={{ width: '100%', borderCollapse: 'collapse' }}>

@@ -3,6 +3,8 @@ import "../../App.css";
 import Sidebar from "../Dashboard/SideBarSection/Sidebar";
 import Body from "../Dashboard/BodySection/Body";
 import CadastrarProduto from "./ProductForm";
+import Comissao from "./Comissao";
+import AlertaEstoque from "./AlertaEstoque";
 import SimularPedido from "./SimuladorPedido";
 import HeaderSection from "../Dashboard/BodySection/TopSection/HeaderSection";
 
