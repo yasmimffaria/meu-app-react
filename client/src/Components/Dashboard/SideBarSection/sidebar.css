@@ -63,7 +63,7 @@
   bottom: 0;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-  background: var(--PrimaryColor);
+  background: var(--PrimaryColororange);
 }
 .sideBar .menuDiv .menuLists .listItem .menuLink,
 .sideBar .settingsDiv .menuLists .listItem .menuLink {
@@ -77,7 +77,7 @@
 }
 .sideBar .menuDiv .menuLists .listItem:hover .menuLink,
 .sideBar .settingsDiv .menuLists .listItem:hover .menuLink {
-  color: var(--PrimaryColor);
+  color: var(--PrimaryColororange);
   transition: 0;
 }
 .sideBar .menuDiv .menuLists .listItem:hover::before,

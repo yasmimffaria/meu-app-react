@@ -10,21 +10,21 @@ const CadastrarProduto = ({ darkMode }) => {
   });
 
   const [produtos, setProdutos] = useState([]);
+  const [editandoIndex, setEditandoIndex] = useState(null);
+  const [editData, setEditData] = useState({ preco: "", qtd: "" });
 
   // Carrega produtos do localStorage ao iniciar
   useEffect(() => {
     const produtosSalvos = localStorage.getItem("produtos");
     if (produtosSalvos) {
-      setProdutos(JSON.parse(produtosSalvos));
+      try {
+        setProdutos(JSON.parse(produtosSalvos));
+      } catch (e) {
+        console.error("Erro ao ler produtos:", e);
+        setProdutos([]);
+      }
     }
   }, []);
-
-  // Salva produtos sempre que a lista muda
-  useEffect(() => {
-    if (produtos.length > 0) {
-      localStorage.setItem("produtos", JSON.stringify(produtos));
-    }
-  }, [produtos]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,9 +39,42 @@ const CadastrarProduto = ({ darkMode }) => {
     const novoProduto = { ...formData };
     const novaLista = [...produtos, novoProduto];
     setProdutos(novaLista);
-    localStorage.setItem("produtos", JSON.stringify(novaLista)); // Salva aqui
+    localStorage.setItem("produtos", JSON.stringify(novaLista));
     alert("Produto cadastrado com sucesso!");
     setFormData({ nome: "", preco: "", qtd: "", descricao: "" });
+  };
+
+  const handleEditClick = (index) => {
+    setEditandoIndex(index);
+    setEditData({
+      preco: produtos[index].preco,
+      qtd: produtos[index].qtd,
+    });
+  };
+
+  const handleEditChange = (e) => {
+    const { name, value } = e.target;
+    setEditData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSaveEdit = (index) => {
+    const atualizados = [...produtos];
+    atualizados[index].preco = editData.preco;
+    atualizados[index].qtd = editData.qtd;
+    setProdutos(atualizados);
+    localStorage.setItem("produtos", JSON.stringify(atualizados));
+    setEditandoIndex(null);
+  };
+
+  const handleDelete = (index) => {
+    if (window.confirm("Tem certeza que deseja excluir este produto?")) {
+      const novaLista = produtos.filter((_, i) => i !== index);
+      setProdutos(novaLista);
+      localStorage.setItem("produtos", JSON.stringify(novaLista));
+    }
   };
 
   return (
@@ -103,14 +136,12 @@ const CadastrarProduto = ({ darkMode }) => {
             </div>
 
             <div className="formActions">
-              <button type="submit" className="btnPrimary">
-                Cadastrar
-              </button>
+              <button type="submit" className="btnPrimary">Cadastrar</button>
               <button
                   type="button"
                   className="btnSecondary"
                   onClick={() =>
-                      setFormData({ nome: "", preco: "", qtd: "", descricao: "" }) // ✅ corrigido
+                      setFormData({ nome: "", preco: "", qtd: "", descricao: "" })
                   }
               >
                 Limpar
@@ -119,7 +150,6 @@ const CadastrarProduto = ({ darkMode }) => {
           </form>
         </div>
 
-        {/* TABELA DE PRODUTOS */}
         {produtos.length > 0 && (
             <div className="tabelaCard">
               <h3>Produtos Cadastrados</h3>
@@ -130,15 +160,103 @@ const CadastrarProduto = ({ darkMode }) => {
                   <th>Preço (R$)</th>
                   <th>Quantidade</th>
                   <th>Descrição</th>
+                  <th>Ações</th>
                 </tr>
                 </thead>
                 <tbody>
                 {produtos.map((produto, index) => (
                     <tr key={index}>
                       <td>{produto.nome}</td>
-                      <td>{parseFloat(produto.preco).toFixed(2)}</td>
-                      <td>{parseInt(produto.qtd)}</td>
+                      <td>
+                        {editandoIndex === index ? (
+                            <input
+                                type="number"
+                                name="preco"
+                                value={editData.preco}
+                                onChange={handleEditChange}
+                                style={{ width: "80px" }}
+                            />
+                        ) : (
+                            parseFloat(produto.preco).toFixed(2)
+                        )}
+                      </td>
+                      <td>
+                        {editandoIndex === index ? (
+                            <input
+                                type="number"
+                                name="qtd"
+                                value={editData.qtd}
+                                onChange={handleEditChange}
+                                style={{ width: "60px" }}
+                            />
+                        ) : (
+                            parseInt(produto.qtd)
+                        )}
+                      </td>
                       <td>{produto.descricao}</td>
+                      <td>
+                        {editandoIndex === index ? (
+                            <>
+                              <button
+                                  onClick={() => handleSaveEdit(index)}
+                                  style={{
+                                    backgroundColor: "#ff8c00",
+                                    color: "#fff",
+                                    marginRight: "5px",
+                                    border: "none",
+                                    padding: "4px 8px",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                  }}
+                              >
+                                Salvar
+                              </button>
+                              <button
+                                  onClick={() => setEditandoIndex(null)}
+                                  style={{
+                                    backgroundColor: "#999",
+                                    color: "#fff",
+                                    border: "none",
+                                    padding: "4px 8px",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                  }}
+                              >
+                                Cancelar
+                              </button>
+                            </>
+                        ) : (
+                            <>
+                              <button
+                                  onClick={() => handleEditClick(index)}
+                                  style={{
+                                    backgroundColor: "#ffa500",
+                                    color: "#fff",
+                                    marginRight: "5px",
+                                    border: "none",
+                                    padding: "4px 8px",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                  }}
+                              >
+                                Editar
+                              </button>
+                              <button
+                                  onClick={() => handleDelete(index)}
+                                  style={{
+                                    backgroundColor: "#cc0000",
+                                    color: "#fff",
+                                    border: "none",
+                                    padding: "4px 8px",
+                                    borderRadius: "4px",
+                                    cursor: "pointer",
+                                  }}
+                              >
+                                Excluir
+                              </button>
+                            </>
+                        )}
+                      </td>
                     </tr>
                 ))}
                 </tbody>

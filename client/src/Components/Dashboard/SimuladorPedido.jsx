@@ -11,6 +11,7 @@ const SimularPedido = ({ darkMode }) => {
     qtd: "",
     opcap: "",
     status: "",
+    comissao: "",
   });
 
   // Buscar produtos do localStorage
@@ -31,22 +32,66 @@ const SimularPedido = ({ darkMode }) => {
       qtd: "",
       opcap: "",
       status: "",
+      comissao: "",
     });
     setMostrarFormulario(true);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Pedido simulado:", formData);
-    alert("Pedido simulado com sucesso!");
+
+    // Verificar se há estoque suficiente
+    const quantidadeSolicitada = parseInt(formData.qtd);
+    const estoqueAtual = parseInt(produtoSelecionado.qtd || 0);
+
+    if (quantidadeSolicitada > estoqueAtual) {
+      alert(`Estoque insuficiente! Disponível: ${estoqueAtual}, Solicitado: ${quantidadeSolicitada}`);
+      return;
+    }
+
+    // Criar objeto do pedido simulado
+    const pedidoSimulado = {
+      ...formData,
+      produto: produtoSelecionado,
+      dataSimulacao: new Date().toLocaleString(),
+      id: Date.now() // ID único baseado no timestamp
+    };
+
+    // Salvar pedido no localStorage
+    const pedidosStorage = localStorage.getItem('pedidosSimulados');
+    const pedidos = pedidosStorage ? JSON.parse(pedidosStorage) : [];
+    pedidos.push(pedidoSimulado);
+    localStorage.setItem('pedidosSimulados', JSON.stringify(pedidos));
+
+    // Atualizar estoque do produto
+    const produtosStorage = localStorage.getItem('produtos');
+    const produtos = produtosStorage ? JSON.parse(produtosStorage) : [];
+
+    const produtoIndex = produtos.findIndex(p =>
+        (p.codigo && p.codigo === produtoSelecionado.codigo) ||
+        (p.nome === produtoSelecionado.nome)
+    );
+
+    if (produtoIndex !== -1) {
+      produtos[produtoIndex].qtd = estoqueAtual - quantidadeSolicitada;
+      localStorage.setItem('produtos', JSON.stringify(produtos));
+    }
+
+    console.log("Pedido simulado:", pedidoSimulado);
+    alert(`Pedido simulado com sucesso! Estoque atualizado: ${estoqueAtual - quantidadeSolicitada}`);
+
     setFormData({
       codproduto: "",
       qtd: "",
       opcap: "",
       status: "",
+      comissao: "",
     });
     setMostrarFormulario(false);
     setProdutoSelecionado(null);
+
+    // Forçar atualização da lista de produtos
+    window.location.reload();
   };
 
   const getImagePath = (produto) => {
@@ -158,6 +203,24 @@ const SimularPedido = ({ darkMode }) => {
                     </select>
                   </div>
 
+                  {/* Campo de Comissão - só aparece se for interno */}
+                  {formData.opcap === "interno" && (
+                      <div className="formGroup">
+                        <label>Comissão (%)</label>
+                        <input
+                            type="number"
+                            name="comissao"
+                            value={formData.comissao}
+                            onChange={handleChange}
+                            min="0"
+                            max="100"
+                            step="0.01"
+                            placeholder="Ex: 5.50"
+                            required
+                        />
+                      </div>
+                  )}
+
                   <div className="formGroup">
                     <label>Status</label>
                     <select
@@ -183,6 +246,13 @@ const SimularPedido = ({ darkMode }) => {
                         onClick={() => {
                           setMostrarFormulario(false);
                           setProdutoSelecionado(null);
+                          setFormData({
+                            codproduto: "",
+                            qtd: "",
+                            opcap: "",
+                            status: "",
+                            comissao: "",
+                          });
                         }}
                     >
                       Cancelar
