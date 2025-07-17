@@ -14,14 +14,12 @@
   padding: 40px;
   min-height: 100vh;
   font-family: "Segoe UI", sans-serif;
-  background-color: var(--background-light);
   color: var(--text-light);
   transition: all 0.3s ease;
 }
 
 /* Dark Mode */
 .cadastrarProdutoContainer.dark {
-  background-color: var(--background-dark);
   color: var(--text-dark);
 }
 

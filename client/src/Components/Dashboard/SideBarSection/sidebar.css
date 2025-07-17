@@ -18,6 +18,14 @@
   --smallestFontSize: .75rem;
 }
 
+.logoDiv {
+  margin-top: -200px;
+}
+
+.menuDiv{
+  margin-top: -600px;
+}
+
 .sideBar {
   background: var(--whiteColor);
   box-shadow: 1px 0px 4px var(--greyText);

@@ -16,7 +16,6 @@ const Sidebar = ({ darkMode, activeSection, setActiveSection }) => {
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: IoMdSpeedometer },
     { id: 'simular-pedido', label: 'Simular Pedido', icon: MdDeliveryDining },
-    { id: 'cadastrar-funcionario', label: 'Cadastrar Funcionario', icon: MdOutlinePermContactCalendar },
     { id: 'cadastrar-produto', label: 'Cadastrar Produto', icon: BsCreditCard2Front },
     { id: 'alerta-estoque', label: 'Alerta Estoque', icon: AiOutlinePieChart },
     { id: 'comissao', label: 'Comissão', icon: BiTrendingUp },
@@ -28,7 +27,6 @@ const Sidebar = ({ darkMode, activeSection, setActiveSection }) => {
           <img src={logo} alt="Logo" />
           <h2>Gestor de Pedidos</h2>
         </div>
-
         <div className="menuDiv">
           <h3 className="divTitle">MENU</h3>
           <ul className="menuLists grid">

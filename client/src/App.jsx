@@ -1,7 +1,5 @@
 import './App.css';
 import Dashboard from './Components/Dashboard/Dashboard';
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
 
 import {
   createBrowserRouter,
@@ -12,14 +10,6 @@ const router = createBrowserRouter([
   {
     path: '/',
     element: <Dashboard />
-  },
-  {
-    path: '/login',
-    element: <Login />
-  },
-  {
-    path: '/register',
-    element: <Register />
   },
   {
     path: '/dashboard',

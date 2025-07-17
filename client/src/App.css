@@ -299,8 +299,8 @@ video {
   margin: auto;
 }
 .dashboard .dashboardContainer {
-  height: 95vh;
-  width: 95%;
+  height: 100vh;
+  width: 100%;
   border-radius: 10px;
   overflow: hidden;
   box-shadow: 0 5px 10px rgb(194, 194, 194);
@@ -480,24 +480,6 @@ wanna see how to create/build it along. */
 
 .sideBar.dark {
   background-color: #1e1e1e;
-}
-
-/* ----------- TOP SECTION ------------ */
-.topSection.light {
-  background-color: #ffffff;
-}
-
-.topSection.dark {
-  background-color: #1a1a1a;
-}
-
-/* ----------- MAIN CONTENT ------------ */
-.mainContent.dark {
-  background-color: #181818;
-}
-
-.mainContent.light {
-  background-color: #f9f9f9;
 }
 
 /* ----------- CARDS ------------ */

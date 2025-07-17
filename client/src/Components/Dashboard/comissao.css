@@ -1,11 +1,15 @@
 .comissaoContainer {
-    padding: 20px;
-    background-color: #fff;
+    padding: 24px;
+    margin-top: 20px;
+    border-radius: 8px;
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease;
 }
 
 .comissaoContainer h2 {
     color: #f57c00;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    font-size: 1.8rem;
 }
 
 .percentualInput {
