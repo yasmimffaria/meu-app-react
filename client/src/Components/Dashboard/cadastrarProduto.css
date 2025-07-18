@@ -89,6 +89,14 @@
   border-color: #555;
 }
 
+.formGroup input[type="url"] {
+  border: 1px solid var(--gray-border);
+  border-radius: 6px;
+  padding: 12px;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
 /* Botões */
 .formActions {
   display: flex;

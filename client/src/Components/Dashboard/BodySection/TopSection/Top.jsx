@@ -100,6 +100,14 @@ const Top = ({ darkMode, toggleTheme }) => {
     setEditandoStatusId(null);
   };
 
+  const handleExcluirPedido = (id) => {
+    if (window.confirm("Tem certeza que deseja excluir este pedido?")) {
+      const pedidosAtualizados = orders.filter((pedido) => pedido.id !== id);
+      setOrders(pedidosAtualizados);
+      localStorage.setItem('pedidosSimulados', JSON.stringify(pedidosAtualizados));
+    }
+  };
+
   return (
       <div className={`topSection ${darkMode ? "dark" : "light"}`} style={{ padding: '20px' }}>
         <div className="contentSection grid">
@@ -190,7 +198,6 @@ const Top = ({ darkMode, toggleTheme }) => {
                               >
                                 Salvar
                               </button>
-
                               <button
                                   onClick={handleCancelarEdicao}
                                   style={{
@@ -207,20 +214,37 @@ const Top = ({ darkMode, toggleTheme }) => {
                               </button>
                             </>
                         ) : (
-                            <button
-                                onClick={() => handleEditarStatus(order.id, order.status)}
-                                style={{
-                                  backgroundColor: '#ffa500',
-                                  color: '#fff',
-                                  padding: '5px 10px',
-                                  border: 'none',
-                                  borderRadius: '5px',
-                                  cursor: 'pointer',
-                                  fontSize: '0.85rem'
-                                }}
-                            >
-                              Editar
-                            </button>
+                            <>
+                              <button
+                                  onClick={() => handleEditarStatus(order.id, order.status)}
+                                  style={{
+                                    backgroundColor: '#ffa500',
+                                    color: '#fff',
+                                    padding: '5px 10px',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    cursor: 'pointer',
+                                    fontSize: '0.85rem',
+                                    marginRight: '5px'
+                                  }}
+                              >
+                                Editar
+                              </button>
+                              <button
+                                  onClick={() => handleExcluirPedido(order.id)}
+                                  style={{
+                                    backgroundColor: '#dc3545',
+                                    color: '#fff',
+                                    padding: '5px 10px',
+                                    border: 'none',
+                                    borderRadius: '5px',
+                                    cursor: 'pointer',
+                                    fontSize: '0.85rem'
+                                  }}
+                              >
+                                Excluir
+                              </button>
+                            </>
                         )}
                       </td>
                     </tr>

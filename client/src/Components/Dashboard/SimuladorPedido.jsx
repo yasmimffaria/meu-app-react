@@ -95,15 +95,15 @@ const SimularPedido = ({ darkMode }) => {
   };
 
   const getImagePath = (produto) => {
-    // If the product has a specific image, try to use it
-    if (produto.imagem) {
-      // Option 1: If images are in public folder
-      return `/assets/${produto.imagem}`;
-
-      // Option 2: If you want to use imported images, you'll need to import them individually
-      // or create a mapping object at the top of the file
+    // Se o produto tem uma URL de imagem válida, use ela
+    if (produto.imagemUrl && produto.imagemUrl.startsWith('http')) {
+      return produto.imagemUrl;
     }
-    // Otherwise, use the default logo
+    // Se tem campo 'imagem' antigo, tenta usar ele
+    if (produto.imagem) {
+      return `/assets/${produto.imagem}`;
+    }
+    // Senão, usa logo padrão
     return defaultLogo;
   };
 

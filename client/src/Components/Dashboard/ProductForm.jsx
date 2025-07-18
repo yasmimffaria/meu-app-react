@@ -7,6 +7,7 @@ const CadastrarProduto = ({ darkMode }) => {
     preco: "",
     qtd: "",
     descricao: "",
+    imagemUrl: "", 
   });
 
   const [produtos, setProdutos] = useState([]);
@@ -41,7 +42,7 @@ const CadastrarProduto = ({ darkMode }) => {
     setProdutos(novaLista);
     localStorage.setItem("produtos", JSON.stringify(novaLista));
     alert("Produto cadastrado com sucesso!");
-    setFormData({ nome: "", preco: "", qtd: "", descricao: "" });
+    setFormData({ nome: "", preco: "", qtd: "", descricao: "", imagemUrl: "" }); // Limpa campo novo
   };
 
   const handleEditClick = (index) => {
@@ -135,6 +136,18 @@ const CadastrarProduto = ({ darkMode }) => {
               />
             </div>
 
+            <div className="formGroup">
+              <label>URL da Imagem</label>
+              <input
+                type="url"
+                name="imagemUrl"
+                value={formData.imagemUrl}
+                onChange={handleInputChange}
+                placeholder="https://exemplo.com/imagem.jpg"
+                required
+              />
+            </div>
+
             <div className="formActions">
               <button type="submit" className="btnPrimary">Cadastrar</button>
               <button
@@ -160,6 +173,7 @@ const CadastrarProduto = ({ darkMode }) => {
                   <th>Preço (R$)</th>
                   <th>Quantidade</th>
                   <th>Descrição</th>
+                  <th>Imagem</th> {/* Nova coluna para imagem */}
                   <th>Ações</th>
                 </tr>
                 </thead>
@@ -194,6 +208,13 @@ const CadastrarProduto = ({ darkMode }) => {
                         )}
                       </td>
                       <td>{produto.descricao}</td>
+                      <td>
+                        <img
+                          src={produto.imagemUrl}
+                          alt={produto.nome}
+                          style={{ width: "50px", height: "50px", borderRadius: "4px" }}
+                        />
+                      </td>
                       <td>
                         {editandoIndex === index ? (
                             <>
